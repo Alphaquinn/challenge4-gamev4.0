@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box ;
+    margin: 0px;
+    padding: 0px;
+    font-family:"Josefin Sans", sans-serif;
+}
+h1{
+    text-align: center ;
+    padding-top: 150px;
+    font-weight: bolder;
+    font-size:  40px; ;
+}
+p{
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+
+}
+#button{
+    text-align: center;
+    
+
+}
+button{
+    text-align: center !important;
+    background-color: purple!important ;
+    color: white !important;
+    font-size: 22px !important;
+    padding: 0px 12px 0px 12px !important;
+
+}
+.btn:hover{
+    text-align: center;
+    background-color: violet;
+    color: white;
+    font-size: 22px;
+    padding: 0px 12px 0px 12px;
+
+}
+#viewHighScores{
+    color: purple;
+    padding-left: 20px;
+
+
+
+}
+#timer{
+    float: right;
+    padding-right: 30px;
+
+}
+#quizQuestionsPage,#finalScorePage,#highScorePage{
+    margin: auto;
+    padding-left: 16%;
+
+}
+.quizChallengePage{
+    align-items: center;
+    text-align: center;
+
+}
+#quizQuestionHeader, #allDone, #highScores{
+    font-size: 25px;
+    font-weight: bolder;
+    padding-top: 100px;
+    padding-bottom: 15px;
+
+}
+li{
+    list-style: none;
+
+}
+.questionButton{
+    text-align: center;
+    background-color: purple;
+    color: white;
+    font-size: 12px;
+    padding: 0px 12px 0px 12px;
+    margin: 5px;
+}
+#answerResponse{
+    font-style: italic;
+    color: grey;
+    font-size: 30px;
+    border-top: grey solid;
+
+}
+#finalScoreIs{
+    font-size: 20px;
+}
+#enterInitials{
+    font-size: 20px;
+    font-weight: bold;
+}
+#initialInput{
+    margin-right: 10px;
+}
+#listItemEl{
+    text-align:left ;
+    background-color: violet;
+    margin: 10px 0px ;
+    padding: 10px;
+
+}
+#highScoreList{
+    padding: 0px;
+
+}
+#endButtonsEl{
+    text-align: left;
+}

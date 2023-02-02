@@ -24,7 +24,7 @@ var allDone = document.getElementById("allDone");
 var saveButton = document.getElementById("saveButton");
 var finalScoreIs = document.getElementById("finalScoreIs");
 var InitialInput = document.getElementById("InitialInput");
-var initials = document.getElementById
+var initials = document.getElementById("initials");
 
 
 var highScoreList = document.getElementById("highScoreList");
@@ -51,7 +51,7 @@ var quizQuestions = [
         
       },
       {
-        title: 'The condition in an if / else statement is enclosed within ____.',
+        "quizQuestionHeader": 'The condition in an if / else statement is enclosed within ____.',
         "one": "1. quotes",
          "two": "2. curly brackets",
          "three":"3. parentheses",
@@ -60,7 +60,7 @@ var quizQuestions = [
         
       },
       {
-        title: 'Arrays in JavaScript can be used to store ____.',
+        "quizQuestionHeader": 'Arrays in JavaScript can be used to store ____.',
         "one": "1. numbers and strings",
          "two": "2. other arrays",
          "three":"3. booleans",
@@ -69,7 +69,7 @@ var quizQuestions = [
         
       },
       {
-        title:
+        "quizQuestionHeader":
           'String values must be enclosed within ____ when being assigned to variables.',
 
           "one": "1. commas",
@@ -80,7 +80,7 @@ var quizQuestions = [
        
       },
       {
-        title:
+        "quizQuestionHeader":
           'A very useful tool used during development and debugging for printing content to the debugger is:',
           "one": "1. Javascript",
          "two": "2. terminal/bash",
@@ -111,22 +111,25 @@ var quizQuestions = [
 
 
 function codeQuiz(){
-    quizHomePage.style.display = "npnr";
-    header.style.display ="block";
+    quizHomePage.style.display = "block";
+    header.style.display = "block";
     quizQuestionsPage.style.display ="none";
     finalScorePage.style.display ="none";
     highScorePage.style.display ="none";
 
-    var startScore =0;
+    var startScore = 0;
     timer.textContent = "Time left:" + startScore;;
 
 }
+
+
 
 function startQuiz (){
     quizHomePage.style.display ="none";
     header.style.display = "block";
     quizQuestionsPage.style.display = "block";
     finalScorePage.style.display = "none";
+    highScorePage.style.display = "none";
 
 
     secondsLeft =75;
@@ -134,8 +137,8 @@ function startQuiz (){
     timerInterval = setInterval(function(){
         secondsLeft--;
 
-        timer.textContent = "Time;"+secondsLeft;
-        if(secondsLeft===0|| quizQuestionsPage.length ===questionIndex){
+        timer.textContent = "Time:"+secondsLeft;
+        if(secondsLeft===0|| quizQuestions.length === questionIndex){
             clearInterval(timerInterval);
             showFinalScore();
         }
@@ -147,37 +150,60 @@ function startQuiz (){
     },1000)
 }
 
-function showQuestions(){
-    var q = QuizQuestions[questionIndex];
-    quizQuestionHeader.innerHTML=q.quizQuestionHeader;
-    choice1.innerHTML=q.one;
+
+
+
+
+
+
+
+
+  function showQuestions() {
+    var q = quizQuestions[questionIndex];
+  
+    quizQuestionHeader.innerHTML = (q.quizQuestionHeader);
+    choice1.innerHTML = q.one;
     choice1.setAttribute("data-answer", q.one);
-    choice2.innerHTML=q.two;
+    choice2.innerHTML = q.two;
     choice2.setAttribute("data-answer", q.two);
-    choice3.innerHTML=q.three;
+    choice3.innerHTML = q.three;
     choice3.setAttribute("data-answer", q.three);
-    choice4.innerHTML=q.four;
+    choice4.innerHTML = q.four;
     choice4.setAttribute("data-answer", q.four);
-}
-showQuestions();
-choice1,addEventListener("click", function(event){
+  }
+      
+  
+  showQuestions();
+
+choice1.addEventListener("click", function(event){
 checkAnswer(event);
 
 })
-choice2,addEventListener("click", function(event){
+choice2.addEventListener("click", function(event){
     checkAnswer(event);
   })
   
   
-choice3,addEventListener("click", function(event){
+choice3.addEventListener("click", function(event){
  checkAnswer(event);
-        
-        })
+})
+choice4.addEventListener("click", function(event){
+    checkAnswer(event);
+    
+    })
 
-        choice4,addEventListener("click", function(event){
-            checkAnswer(event);
-            
-            })
+      
+
+
+
+
+
+
+
+
+
+
+
 
 function checkAnswer(event){
     event.preventDefault();
@@ -197,10 +223,97 @@ function checkAnswer(event){
             secondsLeft = 0;
         }
     }if (quizQuestions.length===questionIndex+1){
-        showfinalScore();
+        showFinalScore();
         timer.innerText = "time:" + secondsLeft;
         return;
     }
     questionIndex++;
     showQuestions();
 }
+
+
+
+
+
+function showFinalScore(){
+    quizHomePage.style.display ="none";
+    quizQuestionsPage.style.display ="none";
+    finalScorePage.style.display ="block";
+    finalScoreIs.style.display ="block";
+    initials.style.display ="block";
+    saveButton.style.display ="block";
+    InitialInput.style.display ="block";
+    highScorePage.style.display ="none";
+
+    finalScoreIs.textContent = "your final score is"+secondsLeft;
+    saveButton.textContent = "Save";
+    initials.textContent = "enter your initials:";
+
+    var savedInitials = document.getElementById("initialsInput").value;
+    var highscoreArray = JSON.parse(localStorage.getItem("highScore")) || [];
+    var localStorageArray = {score: secondsLeft,initials: savedInitials};
+    highscoreArray.push(localStorageArray)
+    localStorage.setItem("highScore", JSON.stringify(highscoreArray));
+    var listItemEl = document.createElement("li");
+    listItemEl.innerText= savedInitials + ":"+ secondsLeft;
+    listItemEl.id = "listItemE1";
+    document.getElementById("highScoreList").append(listItemEl);
+
+}
+function resetVariable(){
+    questionIndex=0;
+}
+startButton.addEventListener("click", function(){
+    startQuiz()
+
+
+})
+saveButton.addEventListener("click", function(){
+    showHighScores();
+    header.style.display= "none";
+    quizQuestionsPage.style.display = "none";
+    finalScorePage.style.display = "none";
+    highScorePage.style.display = "block";
+    clearInterval(timerInterval);
+
+
+
+
+
+})
+ goBackButton.addEventListener("click", function (){
+    document.getElementById("InitialInput").value=("")
+    resetVariables()
+    codeQuiz();
+
+
+
+ })
+ 
+
+ clearHighScore.addEventListener("click", function() {
+    localStorage.clear();
+    resetVariables();
+    highScoreList.innerHTML = "";
+  })
+
+ 
+ viewHighScores.addEventListener("click", function(){
+    header.style.display = "none";
+    quizHomePage.style.display ="none";
+    quizQuestionsPage.style.display = "none";
+    finalScorePage.style.display = "none";
+    highScorePage.style.display = "block";
+
+    showHighScores();
+
+ })
+
+ codeQuiz();
+
+
+
+
+
+
+
